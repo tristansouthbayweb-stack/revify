@@ -3,162 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revify Marketing | High-Performance Ad Systems</title>
+    <title>Revify | Elite Performance Marketing Agency</title>
+    <meta name="description" content="Revify is an elite performance marketing agency specializing in high-ROAS ad systems for 7-figure brands. Premium ad management starting at $1,000/month.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         brand: {
-                            black: '#050505',
+                            black: '#030303',
                             dark: '#0a0a0a',
-                            platinum: '#E5E4E2',
-                            silver: '#C0C0C0',
-                            accent: '#3B82F6' 
+                            platinum: '#E8E6E3',
+                            gold: '#D4AF37',
+                            accent: '#C9A961'
                         }
                     },
                     fontFamily: {
-                        heading: ['"Cinzel"', 'serif'],
-                        body: ['"Montserrat"', 'sans-serif'],
+                        heading: ['Cinzel', 'serif'],
+                        body: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #050505; color: #E5E4E2; }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .text-gradient {
-            background: linear-gradient(to right, #E5E4E2, #9CA3AF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #030303; color: #E8E6E3; font-family: 'Inter', sans-serif; }
+        .luxury-bg { background: linear-gradient(135deg, #030303 0%, #0a0a0a 50%, #111111 100%); }
+        .glass-panel { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-panel-hover:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(212, 175, 55, 0.3); transform: translateY(-5px); transition: all 0.4s ease; }
+        .text-gold { background: linear-gradient(135deg, #D4AF37 0%, #F4E4BC 50%, #D4AF37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .float { animation: float 6s ease-in-out infinite; }
+        .glow { box-shadow: 0 0 60px rgba(212, 175, 55, 0.15); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030303; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
     </style>
 </head>
-<body class="antialiased font-body">
+<body class="antialiased">
 
-    <!-- Nav -->
-    <nav class="fixed w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-white/5">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-[9999] bg-brand-black/95 backdrop-blur-xl border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-heading font-bold tracking-widest text-white">REVIFY</div>
-            <div class="hidden md:flex space-x-8 text-sm tracking-widest uppercase">
-                <a href="#method" class="hover:text-white/70 transition">The Method</a>
-                <a href="#services" class="hover:text-white/70 transition">Services</a>
-                <a href="/revify/serves.html" class="hover:text-white/70 transition">My Serves</a>
-                <a href="#contact" class="px-6 py-2 border border-white/20 hover:bg-white hover:text-black transition duration-300">Get Started</a>
+            <a href="#" class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-gold to-yellow-600 flex items-center justify-center">
+                    <span class="text-brand-black font-bold text-lg">R</span>
+                </div>
+                <span class="text-2xl font-heading font-bold tracking-widest text-white">REVIFY</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-10 text-sm tracking-wider">
+                <a href="#results" class="text-gray-400 hover:text-brand-gold transition">Results</a>
+                <a href="#method" class="text-gray-400 hover:text-brand-gold transition">Method</a>
+                <a href="#services" class="text-gray-400 hover:text-brand-gold transition">Services</a>
+                <a href="#pricing" class="text-gray-400 hover:text-brand-gold transition">Investment</a>
+                <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-brand-gold to-yellow-600 text-brand-black font-bold rounded-full hover:shadow-lg transition">
+                    Book Call
+                </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <header class="relative min-h-screen flex items-center justify-center text-center px-4 overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2574&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/80 to-transparent"></div>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden luxury-bg pt-20">
+        <div class="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-brand-gold/5 rounded-full blur-[150px] float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-white/5 rounded-full blur-[120px] float" style="animation-delay: 3s;"></div>
         
-        <div class="relative z-10 max-w-4xl mx-auto">
-            <p class="text-brand-silver tracking-[0.4em] uppercase text-xs md:text-sm mb-6 animate-fade-in-up">Elite Digital Growth Agency</p>
-            <h1 class="text-5xl md:text-7xl font-heading font-bold text-white mb-8 leading-tight">
-                Dominate Your Niche.<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Scale With Precision.</span>
+        <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-panel mb-8">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span class="text-xs uppercase tracking-widest text-gray-400">Accepting 3 New Clients</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-8 leading-tight">
+                <span class="text-white">We Turn Ad Spend Into</span><br>
+                <span class="text-gold">Predictable Profit</span>
             </h1>
-            <p class="text-lg text-gray-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-                We don't guess. We analyze top-performing competitor ads, re-engineer them with your brand's unique twist, and deploy high-ROAS campaigns on TikTok, FB, and Google.
+            
+            <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+                Elite performance marketing for 7 & 8-figure brands. 
+                We build ad systems that scale from $10k to $100k+ months.
             </p>
-            <a href="#contact" class="inline-block bg-white text-black px-10 py-4 font-bold tracking-widest hover:bg-gray-200 transition duration-300">
-                Book Strategy Call
-            </a>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+                <a href="#contact" class="px-10 py-5 bg-gradient-to-r from-brand-gold to-yellow-600 text-brand-black font-bold text-lg rounded-full hover:shadow-2xl transition">
+                    Schedule Strategy Call
+                </a>
+                <a href="#results" class="px-10 py-5 border border-white/20 text-white font-semibold rounded-full hover:bg-white/5 transition">
+                    View Case Studies
+                </a>
+            </div>
+            
+            <div class="flex flex-wrap justify-center items-center gap-8 text-gray-500 text-sm">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shield-alt text-brand-gold"></i>
+                    <span>14-Day ROI Guarantee</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-lock text-brand-gold"></i>
+                    <span>No Long-Term Contracts</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-chart-line text-brand-gold"></i>
+                    <span>4.5x Average ROAS</span>
+                </div>
+            </div>
         </div>
-    </header>
+    </section>
 
-    <!-- The Method Section -->
-    <section id="method" class="py-24 bg-brand-dark relative">
+    <!-- Results Section -->
+    <section id="results" class="py-24 luxury-bg">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-20">
-                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">The Revify Method</h2>
-                <div class="w-20 h-0.5 bg-white/20 mx-auto"></div>
+                <span class="text-brand-gold uppercase tracking-widest text-sm">Results That Speak</span>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold mt-4 mb-6">Client Success Stories</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Real results from real clients. We measure success by one metric: your bottom line.</p>
             </div>
-
+            
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Step 1 -->
-                <div class="glass-panel p-10 hover:bg-white/5 transition duration-500">
-                    <div class="text-4xl mb-6 text-white/20 font-heading">01</div>
-                    <h3 class="text-xl font-bold text-white mb-4 uppercase tracking-wide">Forensic Analysis</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">
-                        We don't reinvent the wheel. We scan your niche for the top 1% of performing ads. We dissect their hooks, scripts, and visuals to understand exactly *why* they convert.
-                    </p>
+                <!-- Case Study 1 -->
+                <div class="glass-panel glass-panel-hover p-10 rounded-2xl">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-xl">S</div>
+                        <div>
+                            <h4 class="font-bold text-white">Skincare Brand</h4>
+                            <p class="text-gray-500 text-sm">E-commerce</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Monthly Revenue</span>
+                            <span class="text-2xl font-bold text-gold">$847K</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">ROAS</span>
+                            <span class="text-2xl font-bold text-white">6.2x</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm italic">"Revify scaled us from $50k to $800k+ months in 90 days."</p>
                 </div>
-
-                <!-- Step 2 -->
-                <div class="glass-panel p-10 border-white/20 hover:bg-white/5 transition duration-500 relative">
-                    <div class="text-4xl mb-6 text-white/40 font-heading">02</div>
-                    <h3 class="text-xl font-bold text-white mb-4 uppercase tracking-wide">The "Revify" Twist</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">
-                        Copying is for amateurs. We take the winning formula and inject your brand's unique voice, offer, and style. We create creative assets that feel fresh yet familiar to the algorithm.
-                    </p>
+                
+                <!-- Case Study 2 -->
+                <div class="glass-panel glass-panel-hover p-10 rounded-2xl">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-xl">F</div>
+                        <div>
+                            <h4 class="font-bold text-white">Fitness App</h4>
+                            <p class="text-gray-500 text-sm">SaaS</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">New Subscribers</span>
+                            <span class="text-2xl font-bold text-gold">12,400</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">LTV:CAC Ratio</span>
+                            <span class="text-2xl font-bold text-white">8:1</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm italic">"They cracked the code on our TikTok strategy. Game changer."</p>
                 </div>
+                
+                <!-- Case Study 3 -->
+                <div class="glass-panel glass-panel-hover p-10 rounded-2xl">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-xl">H</div>
+                        <div>
+                            <h4 class="font-bold text-white">Home Goods</h4>
+                            <p class="text-gray-500 text-sm">Retail</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Q4 Revenue</span>
+                            <span class="text-2xl font-bold text-gold">$2.4M</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">YoY Growth</span>
+                            <span class="text-2xl font-bold text-white">+340%</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm italic">"Best Q4 in company history. Revify paid for itself 20x over."</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Step 3 -->
-                <div class="glass-panel p-10 hover:bg-white/5 transition duration-500">
-                    <div class="text-4xl mb-6 text-white/20 font-heading">03</div>
-                    <h3 class="text-xl font-bold text-white mb-4 uppercase tracking-wide">Algorithmic Scale</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">
-                        We deploy across Meta, TikTok, and Google. We kill the losers fast and scale the winners aggressively. Our only metric is your ROI.
-                    </p>
+    <!-- Method Section -->
+    <section id="method" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-dark to-brand-black"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-20">
+                <span class="text-brand-gold uppercase tracking-widest text-sm">Our Process</span>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold mt-4 mb-6">The Revify Method</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-panel p-10 rounded-2xl">
+                    <div class="text-6xl font-heading font-bold text-white/10 mb-4">01</div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Forensic Analysis</h3>
+                    <p class="text-gray-400">We reverse-engineer the top 1% of ads in your niche, analyzing hooks, scripts, and angles to understand the winning formula.</p>
+                </div>
+                <div class="glass-panel p-10 rounded-2xl">
+                    <div class="text-6xl font-heading font-bold text-white/10 mb-4">02</div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Creative Engineering</h3>
+                    <p class="text-gray-400">We craft 20-50 unique creative variants, blending proven formulas with your brand's unique voice and style.</p>
+                </div>
+                <div class="glass-panel p-10 rounded-2xl">
+                    <div class="text-6xl font-heading font-bold text-white/10 mb-4">03</div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Algorithmic Scale</h3>
+                    <p class="text-gray-400">We deploy across Meta, TikTok, and Google. Losers killed fast. Winners scaled aggressively. Every decision data-driven.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services -->
-    <section id="services" class="py-24 bg-brand-black border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Multi-Channel Dominance</h2>
-                <p class="text-gray-400 mb-8 leading-relaxed">
-                    Your customers are everywhere. We make sure you are too. Our integrated approach ensures your brand stays top-of-mind from the first scroll to the final checkout.
-                </p>
-                <ul class="space-y-6">
-                    <li class="flex items-center space-x-4">
-                        <span class="w-12 h-px bg-white"></span>
-                        <span class="text-lg tracking-wide uppercase">Facebook & Instagram Ads</span>
-                    </li>
-                    <li class="flex items-center space-x-4">
-                        <span class="w-12 h-px bg-white"></span>
-                        <span class="text-lg tracking-wide uppercase">TikTok Viral Creative</span>
-                    </li>
-                    <li class="flex items-center space-x-4">
-                        <span class="w-12 h-px bg-white"></span>
-                        <span class="text-lg tracking-wide uppercase">Google Search & YouTube</span>
-                    </li>
-                    <li class="flex items-center space-x-4">
-                        <span class="w-12 h-px bg-white"></span>
-                        <span class="text-lg tracking-wide uppercase">UGC Content Production</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="relative">
-                <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent blur-3xl"></div>
-                <div class="glass-panel p-8 md:p-12 relative">
-                    <h3 class="text-2xl font-heading font-bold mb-2">Ready to Scale?</h3>
-                    <p class="text-gray-400 mb-8 text-sm">We only work with businesses ready to handle more volume.</p>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center border-b border-white/10 pb-2">
-                            <span class="text-gray-500 text-xs uppercase">Avg ROAS</span>
-                            <span class="text-white font-bold">4.5x</span>
+    <section id="services" class="py-24 luxury-bg">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-brand-gold uppercase tracking-widest text-sm">Full-Funnel</span>
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold mt-4 mb-6">Complete Ad Ecosystem</h2>
+                    <p class="text-gray-400 mb-8 text-lg">We architect entire acquisition systems that turn strangers into customers at scale.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <i class="fab fa-facebook-f text-brand-gold text-2xl mt-1"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-white">Meta Advertising</h4>
+                                <p class="text-gray-400">Facebook & Instagram campaigns optimized for ROAS.</p>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center border-b border-white/10 pb-2">
-                            <span class="text-gray-500 text-xs uppercase">Leads Generated</span>
-                            <span class="text-white font-bold">50,000+</span>
+                        <div class="flex items-start space-x-4">
+                            <i class="fab fa-tiktok text-brand-gold text-2xl mt-1"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-white">TikTok Viral Creative</h4>
+                                <p class="text-gray-400">Native-style content designed to stop the scroll.</p>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center border-b border-white/10 pb-2">
-                            <span class="text-gray-500 text-xs uppercase">Client Retention</span>
-                            <span class="text-white font-bold">92%</span>
+                        <div class="flex items-start space-x-4">
+                            <i class="fab fa-google text-brand-gold text-2xl mt-1"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-white">Google & YouTube</h4>
+                                <p class="text-gray-400">Capture high-intent traffic and scale with video.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-panel p-10 rounded-2xl glow">
+                    <h3 class="text-3xl font-heading font-bold mb-6">Performance Metrics</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-400">Average ROAS</span>
+                                <span class="text-3xl font-bold text-gold">4.5x</span>
+                            </div>
+                            <div class="h-2 bg-white/10 rounded-full"><div class="h-full bg-brand-gold rounded-full" style="width: 90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-400">Client Retention</span>
+                                <span class="text-3xl font-bold text-gold">94%</span>
+                            </div>
+                            <div class="h-2 bg-white/10 rounded-full"><div class="h-full bg-brand-gold rounded-full" style="width: 94%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-400">Revenue Generated</span>
+                                <span class="text-3xl font-bold text-gold">$50M+</span>
+                            </div>
+                            <div class="h-2 bg-white/10 rounded-full"><div class="h-full bg-brand-gold rounded-full" style="width: 100%"></div></div>
                         </div>
                     </div>
                 </div>
@@ -166,73 +287,92 @@
         </div>
     </section>
 
-    <!-- Pricing -->
-    <section id="pricing" class="py-24 bg-gradient-to-b from-brand-black to-brand-dark border-t border-white/5">
+    <!-- Pricing - $1000/month -->
+    <section id="pricing" class="py-24 luxury-bg">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Simple Pricing. Risk-Free.</h2>
-                <p class="text-gray-400">Prove us wrong. We offer a <span class="text-white font-bold">14-Day Free Trial</span> to demonstrate ROI before you pay a dime.</p>
+                <span class="text-brand-gold uppercase tracking-widest text-sm">Investment</span>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold mt-4 mb-6">Premium Results Require Premium Investment</h2>
             </div>
-
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Option 1 -->
-                <div class="glass-panel p-10 border border-white/10 hover:border-white/30 transition duration-300">
-                    <h3 class="text-xl font-bold text-white mb-2 uppercase tracking-widest">The Partner</h3>
-                    <div class="flex items-baseline mb-6">
-                        <span class="text-4xl font-heading font-bold text-white">$500</span>
-                        <span class="ml-2 text-gray-500 uppercase text-xs tracking-wide">Setup</span>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Performance Partner - $1000/month -->
+                <div class="glass-panel p-10 rounded-2xl border-2 border-brand-gold/50 relative">
+                    <div class="absolute top-0 right-0 bg-brand-gold text-brand-black px-4 py-2 text-sm font-bold">RECOMMENDED</div>
+                    <h3 class="text-2xl font-heading font-bold text-white mb-2">Performance Partner</h3>
+                    <p class="text-gray-400 mb-8">For brands ready to scale aggressively</p>
+                    
+                    <div class="mb-8">
+                        <span class="text-6xl font-bold text-gold">$1,000</span>
+                        <span class="text-gray-400">/month</span>
+                        <p class="text-sm text-gray-500 mt-2">+ $2,000 onboarding & creative setup</p>
                     </div>
-                    <div class="text-2xl font-bold text-brand-accent mb-8">
-                        + 10% Revenue Share
-                    </div>
-                    <ul class="space-y-4 text-gray-400 text-sm mb-8">
-                        <li class="flex items-center"><span class="text-white mr-3">✓</span> We only win when you win</li>
-                        <li class="flex items-center"><span class="text-white mr-3">✓</span> Full Ad Management</li>
-                        <li class="flex items-center"><span class="text-white mr-3">✓</span> Unlimited Creative Testing</li>
-                        <li class="flex items-center"><span class="text-white mr-3">✓</span> 24/7 Slack Support</li>
+                    
+                    <ul class="space-y-4 text-gray-300 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Full Meta & TikTok Management</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>20-50 New Creatives Monthly</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Daily Optimization & Monitoring</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Weekly Strategy Calls</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>24/7 Slack Support</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Custom Landing Page Design</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>14-Day ROI Guarantee</li>
                     </ul>
-                    <a href="#contact" class="block w-full text-center border border-white text-white py-3 font-bold hover:bg-white hover:text-black transition uppercase tracking-widest">Start Free Trial</a>
+                    <a href="#contact" class="block w-full text-center bg-gradient-to-r from-brand-gold to-yellow-600 text-brand-black py-4 font-bold rounded-full hover:shadow-lg transition">Book Strategy Call</a>
                 </div>
-
-                <!-- Option 2 -->
-                <div class="glass-panel p-10 border border-white/10 hover:border-white/30 transition duration-300 bg-white/5">
-                    <h3 class="text-xl font-bold text-white mb-2 uppercase tracking-widest">The Growth</h3>
-                    <div class="flex items-baseline mb-6">
-                        <span class="text-4xl font-heading font-bold text-white">$500</span>
-                        <span class="ml-2 text-gray-500 uppercase text-xs tracking-wide">Setup</span>
+                
+                <!-- Enterprise - $2500/month -->
+                <div class="glass-panel p-10 rounded-2xl">
+                    <h3 class="text-2xl font-heading font-bold text-white mb-2">Enterprise</h3>
+                    <p class="text-gray-400 mb-8">For 8-figure brands demanding dominance</p>
+                    
+                    <div class="mb-8">
+                        <span class="text-6xl font-bold text-white">$2,500</span>
+                        <span class="text-gray-400">/month</span>
+                        <p class="text-sm text-gray-500 mt-2">+ Custom setup fee</p>
                     </div>
-                    <div class="text-2xl font-bold text-white mb-8">
-                        + $100 / Month
-                    </div>
-                    <ul class="space-y-4 text-gray-400 text-sm mb-8">
-                        <li class="flex items-center"><span class="text-white mr-3">✓</span> Perfect for smaller budgets</li>
-                        <li class="flex items-center"><span class="text-white mr-3">✓</span> Standard Ad Management</li>
-                        <li class="flex items-center"><span class="text-white mr-3">✓</span> Monthly Performance Report</li>
-                        <li class="flex items-center"><span class="text-white mr-3">✓</span> Email Support</li>
+                    
+                    <ul class="space-y-4 text-gray-300 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Everything in Performance</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Multi-Channel (Meta, TikTok, Google, YouTube)</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>100+ Creatives Monthly</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>UGC Content Production</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Dedicated Account Strategist</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Conversion Rate Optimization</li>
+                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Priority Support & Reporting</li>
                     </ul>
-                    <a href="#contact" class="block w-full text-center bg-white text-black py-3 font-bold hover:bg-gray-200 transition uppercase tracking-widest">Start Free Trial</a>
+                    <a href="#contact" class="block w-full text-center border-2 border-white text-white py-4 font-bold rounded-full hover:bg-white hover:text-brand-black transition">Contact for Custom Quote</a>
                 </div>
             </div>
+            
+            <p class="text-center text-gray-500 mt-12">Not sure which is right? <a href="#contact" class="text-brand-gold hover:underline">Book a free strategy call</a> and we'll recommend the best fit.</p>
         </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-24 bg-white text-black text-center">
-        <div class="max-w-3xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-heading font-bold mb-6">Stop Leaving Money on the Table.</h2>
-            <p class="text-lg text-gray-600 mb-10">
-                You have a great product. We have the system to sell it. Let's see if we're a match.
-            </p>
-            <a href="mailto:contact@revifymarketing.com" class="inline-block bg-black text-white px-12 py-5 font-bold tracking-widest hover:bg-gray-800 transition duration-300">
-                Contact Us
+    <section id="contact" class="py-24 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-black to-brand-dark"></div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+            <span class="text-brand-gold uppercase tracking-widest text-sm">Get Started</span>
+            <h2 class="text-4xl md:text-5xl font-heading font-bold mt-4 mb-6">Ready to Scale?</h2>
+            <p class="text-gray-400 mb-10 text-lg">Book a free 30-minute strategy call. We'll audit your current ads and show you exactly how we'll scale your brand.</p>
+            <a href="mailto:contact@revifymarketing.com" class="inline-block px-12 py-5 bg-gradient-to-r from-brand-gold to-yellow-600 text-brand-black font-bold text-lg rounded-full hover:shadow-2xl transition">
+                Book Your Strategy Call
             </a>
-            <p class="mt-6 text-sm text-gray-500">Limited client spots available for Q1 2026.</p>
+            <p class="mt-6 text-gray-500 text-sm">Limited to 3 new clients per month. Spots fill quickly.</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-brand-black py-8 border-t border-white/10 text-center">
-        <p class="text-gray-600 text-xs tracking-widest uppercase">&copy; 2026 Revify Marketing. All Rights Reserved.</p>
+    <footer class="bg-brand-black py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-6">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-gold to-yellow-600 flex items-center justify-center">
+                    <span class="text-brand-black font-bold">R</span>
+                </div>
+                <span class="text-2xl font-heading font-bold text-white">REVIFY</span>
+            </div>
+            <p class="text-gray-600 text-sm">&copy; 2026 Revify Marketing. All Rights Reserved.</p>
+        </div>
     </footer>
 
 </body>
