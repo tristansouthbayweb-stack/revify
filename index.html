@@ -1,379 +1,787 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revify | Elite Performance Marketing Agency</title>
-    <meta name="description" content="Revify is an elite performance marketing agency specializing in high-ROAS ad systems for 7-figure brands. Premium ad management starting at $1,000/month.">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Revify | Elite Performance Marketing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            black: '#030303',
-                            dark: '#0a0a0a',
-                            platinum: '#E8E6E3',
-                            gold: '#D4AF37',
-                            accent: '#C9A961'
-                        }
-                    },
-                    fontFamily: {
-                        heading: ['Cinzel', 'serif'],
-                        body: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --brand-black: #030303;
+            --brand-gold: #D4AF37;
+            --brand-gold-light: #F4E4BC;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
         html { scroll-behavior: smooth; }
-        body { background-color: #030303; color: #E8E6E3; font-family: 'Inter', sans-serif; }
-        .luxury-bg { background: linear-gradient(135deg, #030303 0%, #0a0a0a 50%, #111111 100%); }
-        .glass-panel { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .glass-panel-hover:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(212, 175, 55, 0.3); transform: translateY(-5px); transition: all 0.4s ease; }
-        .text-gold { background: linear-gradient(135deg, #D4AF37 0%, #F4E4BC 50%, #D4AF37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-        .float { animation: float 6s ease-in-out infinite; }
-        .glow { box-shadow: 0 0 60px rgba(212, 175, 55, 0.15); }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #030303; }
-        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--brand-black);
+            color: #E8E6E3;
+            overflow-x: hidden;
+        }
+        #canvas-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(3, 3, 3, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+        .logo-mark {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--brand-gold) 0%, #B8941F 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--brand-black);
+        }
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: white;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--brand-gold); }
+        .nav-cta {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--brand-gold) 0%, #B8941F 100%);
+            color: var(--brand-black);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 100px;
+            text-decoration: none;
+        }
+        section {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+        }
+        .section-content { max-width: 600px; }
+        .section-number {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--brand-gold);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .section-number::before {
+            content: '';
+            width: 40px; height: 1px;
+            background: var(--brand-gold);
+        }
+        h1, h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        h1 {
+            background: linear-gradient(135deg, #fff 0%, #E8E6E3 50%, var(--brand-gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        h2 { color: white; }
+        p {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 480px;
+            line-height: 1.8;
+        }
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .stat-item {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+        .stat-value {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--brand-gold) 0%, #B8941F 100%);
+            color: var(--brand-black);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--glass-border);
+        }
+        .btn-secondary:hover {
+            border-color: var(--brand-gold);
+            color: var(--brand-gold);
+        }
+        .trust-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .process-card {
+            padding: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+        .process-number {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.05);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .process-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.75rem;
+        }
+        .process-desc {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.7;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .pricing-card {
+            padding: 2.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            position: relative;
+        }
+        .pricing-card.featured {
+            border-color: rgba(212, 175, 55, 0.5);
+            background: rgba(212, 175, 55, 0.05);
+        }
+        .pricing-card.featured::before {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: 0; right: 2rem;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--brand-gold) 0%, #B8941F 100%);
+            color: var(--brand-black);
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            border-radius: 100px;
+        }
+        .pricing-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        .pricing-desc {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 1.5rem;
+        }
+        .pricing-price { margin-bottom: 2rem; }
+        .price {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .price-period {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .price-note {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 0.5rem;
+        }
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .feature-list li:last-child { border-bottom: none; }
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            background: var(--brand-gold);
+            z-index: 1001;
+            transform-origin: left;
+            transform: scaleX(0);
+            box-shadow: 0 0 10px var(--brand-gold);
+        }
+        #loader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--brand-black);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            background: linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+        }
+        .loader-bar {
+            width: 200px; height: 2px;
+            background: var(--glass-bg);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .loader-progress {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--brand-gold) 0%, var(--brand-gold-light) 100%);
+            box-shadow: 0 0 10px var(--brand-gold);
+            transition: width 0.3s ease;
+        }
+        @media (max-width: 1024px) {
+            .process-grid, .pricing-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            section { padding: 0 5%; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .cta-group { flex-direction: column; }
+        }
     </style>
 </head>
-<body class="antialiased">
-
-    <!-- Navigation -->
-    <nav class="fixed w-full z-[9999] bg-brand-black/95 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-gold to-yellow-600 flex items-center justify-center">
-                    <span class="text-brand-black font-bold text-lg">R</span>
-                </div>
-                <span class="text-2xl font-heading font-bold tracking-widest text-white">REVIFY</span>
-            </a>
-            <div class="hidden md:flex items-center space-x-10 text-sm tracking-wider">
-                <a href="#results" class="text-gray-400 hover:text-brand-gold transition">Results</a>
-                <a href="#method" class="text-gray-400 hover:text-brand-gold transition">Method</a>
-                <a href="#services" class="text-gray-400 hover:text-brand-gold transition">Services</a>
-                <a href="#pricing" class="text-gray-400 hover:text-brand-gold transition">Investment</a>
-                <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-brand-gold to-yellow-600 text-brand-black font-bold rounded-full hover:shadow-lg transition">
-                    Book Call
-                </a>
-            </div>
+<body>
+    <div class="scroll-progress" id="scroll-progress"></div>
+    
+    <div id="loader">
+        <div class="loader-logo">REVIFY</div>
+        <div class="loader-bar">
+            <div class="loader-progress" id="loader-progress"></div>
         </div>
+    </div>
+
+    <nav id="navbar">
+        <a href="#" class="logo">
+            <div class="logo-mark">R</div>
+            <span class="logo-text">REVIFY</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#intro">Intro</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#method">Method</a></li>
+            <li><a href="#pricing">Investment</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Book Call</a>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden luxury-bg pt-20">
-        <div class="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-brand-gold/5 rounded-full blur-[150px] float"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-white/5 rounded-full blur-[120px] float" style="animation-delay: 3s;"></div>
+    <div id="canvas-container"></div>
+
+    <section id="intro">
+        <div class="section-content">
+            <div class="section-number">01 / Introduction</div>
+            <h1>We Turn Ad Spend Into Predictable Profit</h1>
+            <p>Elite performance marketing for 7 & 8-figure brands. We build ad systems that scale from $10k to $100k+ months.</p>
+            <div class="cta-group">
+                <a href="#contact" class="btn btn-primary">Schedule Strategy Call →</a>
+                <a href="#results" class="btn btn-secondary">View Case Studies</a>
+            </div>
+            <div class="trust-badges">
+                <div class="trust-item"><span>✦</span><span>14-Day ROI Guarantee</span></div>
+                <div class="trust-item"><span>✦</span><span>No Long-Term Contracts</span></div>
+                <div class="trust-item"><span>✦</span><span>4.5x Average ROAS</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="results">
+        <div class="section-content">
+            <div class="section-number">02 / Results That Speak</div>
+            <h2>Client Success Stories</h2>
+            <p>Real results from real clients. We measure success by one metric: your bottom line.</p>
+            <div class="glass-card">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">Skincare Brand Revenue</div>
+                        <div class="stat-value">$847K</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Fitness App Subscribers</div>
+                        <div class="stat-value">12,400</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Home Goods Q4 Revenue</div>
+                        <div class="stat-value">$2.4M</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Average ROAS</div>
+                        <div class="stat-value">6.2x</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="method">
+        <div class="section-content" style="max-width: 900px;">
+            <div class="section-number">03 / Our Process</div>
+            <h2>The Revify Method</h2>
+            <p>A proven system for scaling brands through paid acquisition.</p>
+            <div class="process-grid">
+                <div class="process-card">
+                    <div class="process-number">01</div>
+                    <h3 class="process-title">Forensic Analysis</h3>
+                    <p class="process-desc">We reverse-engineer the top 1% of ads in your niche, analyzing hooks, scripts, and angles.</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-number">02</div>
+                    <h3 class="process-title">Creative Engineering</h3>
+                    <p class="process-desc">We craft 20-50 unique creative variants, blending proven formulas with your brand voice.</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-number">03</div>
+                    <h3 class="process-title">Algorithmic Scale</h3>
+                    <p class="process-desc">We deploy across Meta, TikTok, and Google. Losers killed fast. Winners scaled aggressively.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <div class="section-content" style="max-width: 900px;">
+            <div class="section-number">04 / Investment</div>
+            <h2>Premium Results Require Premium Investment</h2>
+            <p>Choose the partnership level that fits your growth goals.</p>
+            <div class="pricing-grid">
+                <div class="pricing-card featured">
+                    <h3 class="pricing-name">Performance Partner</h3>
+                    <p class="pricing-desc">For brands ready to scale aggressively</p>
+                    <div class="pricing-price">
+                        <span class="price">$1,000</span>
+                        <span class="price-period">/month</span>
+                        <p class="price-note">+ $2,000 onboarding & creative setup</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li><span>✦</span> Full Meta & TikTok Management</li>
+                        <li><span>✦</span> 20-50 New Creatives Monthly</li>
+                        <li><span>✦</span> Daily Optimization & Monitoring</li>
+                        <li><span>✦</span> Weekly Strategy Calls</li>
+                        <li><span>✦</span> 24/7 Slack Support</li>
+                        <li><span>✦</span> 14-Day ROI Guarantee</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="width: 100%; justify-content: center;">Book Strategy Call</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="pricing-name">Enterprise</h3>
+                    <p class="pricing-desc">For 8-figure brands demanding dominance</p>
+                    <div class="pricing-price">
+                        <span class="price" style="color: white; -webkit-text-fill-color: white;">$2,500</span>
+                        <span class="price-period">/month</span>
+                        <p class="price-note">+ Custom setup fee</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li><span>✦</span> Everything in Performance</li>
+                        <li><span>✦</span> Multi-Channel (Meta, TikTok, Google, YouTube)</li>
+                        <li><span>✦</span> 100+ Creatives Monthly</li>
+                        <li><span>✦</span> UGC Content Production</li>
+                        <li><span>✦</span> Dedicated Account Strategist</li>
+                        <li><span>✦</span> Priority Support & Reporting</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary" style="width: 100%; justify-content: center;">Contact for Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-content" style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <div class="section-number" style="justify-content: center;">05 / Get Started</div>
+            <h2>Ready to Scale?</h2>
+            <p>Book a free 30-minute strategy call. We'll audit your current ads and show you exactly how we'll scale your brand.</p>
+            <div class="cta-group" style="justify-content: center;">
+                <a href="mailto:contact@revifymarketing.com" class="btn btn-primary">Book Your Strategy Call →</a>
+            </div>
+            <p style="margin-top: 2rem; font-size: 0.9rem; color: rgba(255,255,255,0.4);">Limited to 3 new clients per month. Spots fill quickly.</p>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Three.js Setup
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x030303, 0.015);
         
-        <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-panel mb-8">
-                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span class="text-xs uppercase tracking-widest text-gray-400">Accepting 3 New Clients</span>
-            </div>
-            
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-8 leading-tight">
-                <span class="text-white">We Turn Ad Spend Into</span><br>
-                <span class="text-gold">Predictable Profit</span>
-            </h1>
-            
-            <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-                Elite performance marketing for 7 & 8-figure brands. 
-                We build ad systems that scale from $10k to $100k+ months.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-                <a href="#contact" class="px-10 py-5 bg-gradient-to-r from-brand-gold to-yellow-600 text-brand-black font-bold text-lg rounded-full hover:shadow-2xl transition">
-                    Schedule Strategy Call
-                </a>
-                <a href="#results" class="px-10 py-5 border border-white/20 text-white font-semibold rounded-full hover:bg-white/5 transition">
-                    View Case Studies
-                </a>
-            </div>
-            
-            <div class="flex flex-wrap justify-center items-center gap-8 text-gray-500 text-sm">
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-shield-alt text-brand-gold"></i>
-                    <span>14-Day ROI Guarantee</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-lock text-brand-gold"></i>
-                    <span>No Long-Term Contracts</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-chart-line text-brand-gold"></i>
-                    <span>4.5x Average ROAS</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 12);
+        
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.3;
+        container.appendChild(renderer.domElement);
 
-    <!-- Results Section -->
-    <section id="results" class="py-24 luxury-bg">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <span class="text-brand-gold uppercase tracking-widest text-sm">Results That Speak</span>
-                <h2 class="text-4xl md:text-5xl font-heading font-bold mt-4 mb-6">Client Success Stories</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">Real results from real clients. We measure success by one metric: your bottom line.</p>
-            </div>
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.3);
+        scene.add(ambientLight);
+        
+        const mainLight = new THREE.DirectionalLight(0xFFD700, 1.5);
+        mainLight.position.set(5, 5, 5);
+        scene.add(mainLight);
+        
+        const rimLight = new THREE.SpotLight(0x00d4ff, 2);
+        rimLight.position.set(-5, 5, -5);
+        scene.add(rimLight);
+        
+        const goldLight = new THREE.PointLight(0xD4AF37, 1, 20);
+        goldLight.position.set(3, -2, 3);
+        scene.add(goldLight);
+
+        // 3D Model - Luxury Geometric Sculpture
+        const modelGroup = new THREE.Group();
+        scene.add(modelGroup);
+
+        const goldMaterial = new THREE.MeshStandardMaterial({
+            color: 0xD4AF37,
+            metalness: 1.0,
+            roughness: 0.15
+        });
+
+        const darkMetalMaterial = new THREE.MeshStandardMaterial({
+            color: 0x1a1a1a,
+            metalness: 0.9,
+            roughness: 0.3
+        });
+
+        // Central Core
+        const coreGeometry = new THREE.IcosahedronGeometry(1.2, 1);
+        const core = new THREE.Mesh(coreGeometry, goldMaterial);
+        modelGroup.add(core);
+
+        // Outer Rings
+        const ring1Geometry = new THREE.TorusGeometry(3, 0.1, 16, 100);
+        const ring1 = new THREE.Mesh(ring1Geometry, darkMetalMaterial);
+        ring1.position.z = 0.5;
+        modelGroup.add(ring1);
+
+        const ring2Geometry = new THREE.TorusGeometry(2.5, 0.08, 16, 100);
+        const ring2 = new THREE.Mesh(ring2Geometry, goldMaterial);
+        ring2.position.z = -0.3;
+        ring2.rotation.x = Math.PI / 6;
+        modelGroup.add(ring2);
+
+        const ring3Geometry = new THREE.TorusGeometry(3.5, 0.06, 16, 100);
+        const ring3 = new THREE.Mesh(ring3Geometry, darkMetalMaterial);
+        ring3.rotation.y = Math.PI / 4;
+        modelGroup.add(ring3);
+
+        // Floating Cubes
+        const cubeGeometry = new THREE.BoxGeometry(0.3, 0.3, 0.3);
+        for (let i = 0; i < 8; i++) {
+            const angle = (i / 8) * Math.PI * 2;
+            const cube = new THREE.Mesh(cubeGeometry, i % 2 === 0 ? goldMaterial : darkMetalMaterial);
+            cube.position.set(Math.cos(angle) * 4, Math.sin(angle) * 4, 0);
+            modelGroup.add(cube);
+        }
+
+        // GSAP ScrollTrigger Setup
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Loading Animation
+        const loaderProgress = document.getElementById('loader-progress');
+        const loader = document.getElementById('loader');
+        
+        gsap.to(loaderProgress, {
+            width: '100%',
+            duration: 1.5,
+            ease: 'power2.inOut',
+            onComplete: () => {
+                loader.classList.add('hidden');
+            }
+        });
+
+        // Scroll Progress Bar
+        gsap.to('#scroll-progress', {
+            scaleX: 1,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: 'body',
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 0.3
+            }
+        });
+
+        // Section 1: Hero Animation
+        const heroTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#intro',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 1
+            }
+        });
+
+        heroTl.fromTo(modelGroup.rotation, 
+            { x: 0, y: 0 },
+            { x: 0.3, y: Math.PI * 2, ease: 'none' }
+        );
+
+        heroTl.fromTo(modelGroup.position,
+            { x: 3, y: 0 },
+            { x: 0, y: 0, ease: 'none' },
+            0
+        );
+
+        // Section 2: Results - Zoom In
+        const resultsTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#results',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1
+            }
+        });
+
+        resultsTl.fromTo(modelGroup.position,
+            { z: 0 },
+            { z: 4, ease: 'none' }
+        );
+
+        resultsTl.fromTo(modelGroup.rotation,
+            { x: 0.3, y: Math.PI * 2 },
+            { x: Math.PI / 3, y: Math.PI * 4, ease: 'none' },
+            0
+        );
+
+        // Animate rings
+        resultsTl.to(ring1.rotation, { x: Math.PI * 2, ease: 'none' }, 0);
+        resultsTl.to(ring2.rotation, { y: Math.PI * 2, ease: 'none' }, 0);
+
+        // Section 3: Method - Exploded View
+        const methodTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#method',
+                start: 'top bottom',
+                end: 'center center',
+                scrub: 1
+            }
+        });
+
+        // Explode rings outward
+        methodTl.to(ring1.position, { z: 5, x: 2, ease: 'power2.out' }, 0);
+        methodTl.to(ring2.position, { z: -4, x: -2, ease: 'power2.out' }, 0);
+        methodTl.to(ring3.position, { y: 3, ease: 'power2.out' }, 0);
+
+        // Explode cubes
+        modelGroup.children.forEach((child, i) => {
+            if (child.geometry.type === 'BoxGeometry') {
+                const angle = (i / 8) * Math.PI * 2;
+                methodTl.to(child.position, {
+                    x: Math.cos(angle) * 7,
+                    y: Math.sin(angle) * 7,
+                    z: (Math.random() - 0.5) * 4,
+                    ease: 'power2.out'
+                }, 0);
+            }
+        });
+
+        // Section 4: Pricing - Reassemble
+        const pricingTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#pricing',
+                start: 'top bottom',
+                end: 'bottom bottom',
+                scrub: 1
+            }
+        });
+
+        // Reassemble
+        pricingTl.to(ring1.position, { z: 0.5, x: 0, ease: 'power2.in' }, 0);
+        pricingTl.to(ring2.position, { z: -0.3, x: 0, ease: 'power2.in' }, 0);
+        pricingTl.to(ring3.position, { y: 0, ease: 'power2.in' }, 0);
+
+        // Reassemble cubes
+        modelGroup.children.forEach((child, i) => {
+            if (child.geometry.type === 'BoxGeometry') {
+                const angle = ((i - 3) / 8) * Math.PI * 2;
+                pricingTl.to(child.position, {
+                    x: Math.cos(angle) * 4,
+                    y: Math.sin(angle) * 4,
+                    z: 0,
+                    ease: 'power2.in'
+                }, 0);
+            }
+        });
+
+        pricingTl.to(modelGroup.rotation, {
+            x: 0.2,
+            y: Math.PI * 6,
+            ease: 'none'
+        }, 0);
+
+        // Render Loop
+        function animate() {
+            requestAnimationFrame(animate);
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Case Study 1 -->
-                <div class="glass-panel glass-panel-hover p-10 rounded-2xl">
-                    <div class="flex items-center space-x-4 mb-6">
-                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-xl">S</div>
-                        <div>
-                            <h4 class="font-bold text-white">Skincare Brand</h4>
-                            <p class="text-gray-500 text-sm">E-commerce</p>
-                        </div>
-                    </div>
-                    <div class="space-y-4 mb-6">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">Monthly Revenue</span>
-                            <span class="text-2xl font-bold text-gold">$847K</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">ROAS</span>
-                            <span class="text-2xl font-bold text-white">6.2x</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 text-sm italic">"Revify scaled us from $50k to $800k+ months in 90 days."</p>
-                </div>
-                
-                <!-- Case Study 2 -->
-                <div class="glass-panel glass-panel-hover p-10 rounded-2xl">
-                    <div class="flex items-center space-x-4 mb-6">
-                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-xl">F</div>
-                        <div>
-                            <h4 class="font-bold text-white">Fitness App</h4>
-                            <p class="text-gray-500 text-sm">SaaS</p>
-                        </div>
-                    </div>
-                    <div class="space-y-4 mb-6">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">New Subscribers</span>
-                            <span class="text-2xl font-bold text-gold">12,400</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">LTV:CAC Ratio</span>
-                            <span class="text-2xl font-bold text-white">8:1</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 text-sm italic">"They cracked the code on our TikTok strategy. Game changer."</p>
-                </div>
-                
-                <!-- Case Study 3 -->
-                <div class="glass-panel glass-panel-hover p-10 rounded-2xl">
-                    <div class="flex items-center space-x-4 mb-6">
-                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-xl">H</div>
-                        <div>
-                            <h4 class="font-bold text-white">Home Goods</h4>
-                            <p class="text-gray-500 text-sm">Retail</p>
-                        </div>
-                    </div>
-                    <div class="space-y-4 mb-6">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">Q4 Revenue</span>
-                            <span class="text-2xl font-bold text-gold">$2.4M</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">YoY Growth</span>
-                            <span class="text-2xl font-bold text-white">+340%</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 text-sm italic">"Best Q4 in company history. Revify paid for itself 20x over."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Method Section -->
-    <section id="method" class="py-24 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-brand-dark to-brand-black"></div>
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-20">
-                <span class="text-brand-gold uppercase tracking-widest text-sm">Our Process</span>
-                <h2 class="text-4xl md:text-5xl font-heading font-bold mt-4 mb-6">The Revify Method</h2>
-            </div>
+            // Idle rotation
+            if (!ScrollTrigger.isScrolling()) {
+                modelGroup.rotation.y += 0.001;
+                ring1.rotation.x += 0.002;
+                ring2.rotation.y -= 0.003;
+            }
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass-panel p-10 rounded-2xl">
-                    <div class="text-6xl font-heading font-bold text-white/10 mb-4">01</div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Forensic Analysis</h3>
-                    <p class="text-gray-400">We reverse-engineer the top 1% of ads in your niche, analyzing hooks, scripts, and angles to understand the winning formula.</p>
-                </div>
-                <div class="glass-panel p-10 rounded-2xl">
-                    <div class="text-6xl font-heading font-bold text-white/10 mb-4">02</div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Creative Engineering</h3>
-                    <p class="text-gray-400">We craft 20-50 unique creative variants, blending proven formulas with your brand's unique voice and style.</p>
-                </div>
-                <div class="glass-panel p-10 rounded-2xl">
-                    <div class="text-6xl font-heading font-bold text-white/10 mb-4">03</div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Algorithmic Scale</h3>
-                    <p class="text-gray-400">We deploy across Meta, TikTok, and Google. Losers killed fast. Winners scaled aggressively. Every decision data-driven.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            renderer.render(scene, camera);
+        }
 
-    <!-- Services -->
-    <section id="services" class="py-24 luxury-bg">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div>
-                    <span class="text-brand-gold uppercase tracking-widest text-sm">Full-Funnel</span>
-                    <h2 class="text-4xl md:text-5xl font-heading font-bold mt-4 mb-6">Complete Ad Ecosystem</h2>
-                    <p class="text-gray-400 mb-8 text-lg">We architect entire acquisition systems that turn strangers into customers at scale.</p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start space-x-4">
-                            <i class="fab fa-facebook-f text-brand-gold text-2xl mt-1"></i>
-                            <div>
-                                <h4 class="text-xl font-bold text-white">Meta Advertising</h4>
-                                <p class="text-gray-400">Facebook & Instagram campaigns optimized for ROAS.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <i class="fab fa-tiktok text-brand-gold text-2xl mt-1"></i>
-                            <div>
-                                <h4 class="text-xl font-bold text-white">TikTok Viral Creative</h4>
-                                <p class="text-gray-400">Native-style content designed to stop the scroll.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <i class="fab fa-google text-brand-gold text-2xl mt-1"></i>
-                            <div>
-                                <h4 class="text-xl font-bold text-white">Google & YouTube</h4>
-                                <p class="text-gray-400">Capture high-intent traffic and scale with video.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass-panel p-10 rounded-2xl glow">
-                    <h3 class="text-3xl font-heading font-bold mb-6">Performance Metrics</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="text-gray-400">Average ROAS</span>
-                                <span class="text-3xl font-bold text-gold">4.5x</span>
-                            </div>
-                            <div class="h-2 bg-white/10 rounded-full"><div class="h-full bg-brand-gold rounded-full" style="width: 90%"></div></div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="text-gray-400">Client Retention</span>
-                                <span class="text-3xl font-bold text-gold">94%</span>
-                            </div>
-                            <div class="h-2 bg-white/10 rounded-full"><div class="h-full bg-brand-gold rounded-full" style="width: 94%"></div></div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="text-gray-400">Revenue Generated</span>
-                                <span class="text-3xl font-bold text-gold">$50M+</span>
-                            </div>
-                            <div class="h-2 bg-white/10 rounded-full"><div class="h-full bg-brand-gold rounded-full" style="width: 100%"></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        animate();
 
-    <!-- Pricing - $1000/month -->
-    <section id="pricing" class="py-24 luxury-bg">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="text-brand-gold uppercase tracking-widest text-sm">Investment</span>
-                <h2 class="text-4xl md:text-5xl font-heading font-bold mt-4 mb-6">Premium Results Require Premium Investment</h2>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <!-- Performance Partner - $1000/month -->
-                <div class="glass-panel p-10 rounded-2xl border-2 border-brand-gold/50 relative">
-                    <div class="absolute top-0 right-0 bg-brand-gold text-brand-black px-4 py-2 text-sm font-bold">RECOMMENDED</div>
-                    <h3 class="text-2xl font-heading font-bold text-white mb-2">Performance Partner</h3>
-                    <p class="text-gray-400 mb-8">For brands ready to scale aggressively</p>
-                    
-                    <div class="mb-8">
-                        <span class="text-6xl font-bold text-gold">$1,000</span>
-                        <span class="text-gray-400">/month</span>
-                        <p class="text-sm text-gray-500 mt-2">+ $2,000 onboarding & creative setup</p>
-                    </div>
-                    
-                    <ul class="space-y-4 text-gray-300 mb-8">
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Full Meta & TikTok Management</li>
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>20-50 New Creatives Monthly</li>
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Daily Optimization & Monitoring</li>
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Weekly Strategy Calls</li>
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>24/7 Slack Support</li>
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Custom Landing Page Design</li>
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>14-Day ROI Guarantee</li>
-                    </ul>
-                    <a href="#contact" class="block w-full text-center bg-gradient-to-r from-brand-gold to-yellow-600 text-brand-black py-4 font-bold rounded-full hover:shadow-lg transition">Book Strategy Call</a>
-                </div>
-                
-                <!-- Enterprise - $2500/month -->
-                <div class="glass-panel p-10 rounded-2xl">
-                    <h3 class="text-2xl font-heading font-bold text-white mb-2">Enterprise</h3>
-                    <p class="text-gray-400 mb-8">For 8-figure brands demanding dominance</p>
-                    
-                    <div class="mb-8">
-                        <span class="text-6xl font-bold text-white">$2,500</span>
-                        <span class="text-gray-400">/month</span>
-                        <p class="text-sm text-gray-500 mt-2">+ Custom setup fee</p>
-                    </div>
-                    
-                    <ul class="space-y-4 text-gray-300 mb-8">
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Everything in Performance</li>
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Multi-Channel (Meta, TikTok, Google, YouTube)</li>
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>100+ Creatives Monthly</li>
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>UGC Content Production</li>
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Dedicated Account Strategist</li>
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Conversion Rate Optimization</li>
-                        <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i>Priority Support & Reporting</li>
-                    </ul>
-                    <a href="#contact" class="block w-full text-center border-2 border-white text-white py-4 font-bold rounded-full hover:bg-white hover:text-brand-black transition">Contact for Custom Quote</a>
-                </div>
-            </div>
-            
-            <p class="text-center text-gray-500 mt-12">Not sure which is right? <a href="#contact" class="text-brand-gold hover:underline">Book a free strategy call</a> and we'll recommend the best fit.</p>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="py-24 relative">
-        <div class="absolute inset-0 bg-gradient-to-b from-brand-black to-brand-dark"></div>
-        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
-            <span class="text-brand-gold uppercase tracking-widest text-sm">Get Started</span>
-            <h2 class="text-4xl md:text-5xl font-heading font-bold mt-4 mb-6">Ready to Scale?</h2>
-            <p class="text-gray-400 mb-10 text-lg">Book a free 30-minute strategy call. We'll audit your current ads and show you exactly how we'll scale your brand.</p>
-            <a href="mailto:contact@revifymarketing.com" class="inline-block px-12 py-5 bg-gradient-to-r from-brand-gold to-yellow-600 text-brand-black font-bold text-lg rounded-full hover:shadow-2xl transition">
-                Book Your Strategy Call
-            </a>
-            <p class="mt-6 text-gray-500 text-sm">Limited to 3 new clients per month. Spots fill quickly.</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-brand-black py-12 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="flex items-center justify-center space-x-3 mb-6">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-gold to-yellow-600 flex items-center justify-center">
-                    <span class="text-brand-black font-bold">R</span>
-                </div>
-                <span class="text-2xl font-heading font-bold text-white">REVIFY</span>
-            </div>
-            <p class="text-gray-600 text-sm">&copy; 2026 Revify Marketing. All Rights Reserved.</p>
-        </div>
-    </footer>
-
+        // Resize Handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>
